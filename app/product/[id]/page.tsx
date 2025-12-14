@@ -3,8 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Star } from "lucide-react";
 import FavoriteButton from "@/components/FavoriteButton";
-import { PRODUCTS } from "@/data/products";
-import { getProductById } from "@/lib/products";
+import { getProductById, PRODUCTS } from "@/lib/products";
 import Image from "next/image";
 
 export async function generateStaticParams() {

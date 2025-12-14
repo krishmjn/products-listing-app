@@ -3,7 +3,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import ProductCard from "@/components/ProductCard";
 import { getFavorites, removeFavorite } from "@/lib/favourites";
-import { PRODUCTS } from "@/data/products";
+import { PRODUCTS } from "@/lib/products";
 import { Product } from "@/lib/types";
 import { Heart, Loader2 } from "lucide-react";
 
