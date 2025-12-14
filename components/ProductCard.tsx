@@ -17,6 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   onRemoveFavorite,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const showConfirmModal = () => {
     setModalVisible(true);
@@ -38,13 +39,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
     <div className="bg-gray-700 rounded-xl shadow-lg overflow-hidden  shadow-lg hover:shadow-2xl">
       <Link href={`/product/${product.id}`} className="block">
         <div className="relative h-64 bg-gray-600 overflow-hidden">
+          {loading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-600">
+              <div className="w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
+            </div>
+          )}
           <Image
             src={product.image}
             alt={product.name}
             fill={true}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={true}
-            className="object-cover hover:scale-105 transition-transform duration-300"
+            className={`object-cover hover:scale-105 transition-transform duration-300 ${
+              loading ? "opacity-0" : "opacity-100"
+            }`}
+            onLoad={() => setLoading(false)}
           />
           <span className="absolute top-3 right-3 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
             {product.category}

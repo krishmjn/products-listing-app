@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Star } from "lucide-react";
@@ -12,11 +13,12 @@ export async function generateStaticParams() {
   }));
 }
 
-const ProductDetailsPage: React.FC<{ params: { id: string } }> = async ({
+const ProductDetailsPage: React.FC<{ params: { id: string } }> = ({
   params,
 }) => {
-  const { id } = await params;
-  const product = await getProductById(id);
+  const [loading, setLoading] = useState(true);
+  const { id } = params;
+  const product = getProductById(id);
 
   if (!product) {
     notFound();
@@ -36,13 +38,21 @@ const ProductDetailsPage: React.FC<{ params: { id: string } }> = async ({
         <div className="bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
           <div className="grid md:grid-cols-2 gap-8 p-8">
             <div className="relative h-96 bg-gray-700 rounded-lg overflow-hidden">
+              {loading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-700">
+                  <div className="w-12 h-12 border-4 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
+                </div>
+              )}
               <Image
                 src={product.image}
                 alt={product.name}
                 fill={true}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority={true}
-                className="object-cover"
+                className={`object-cover ${
+                  loading ? "opacity-0" : "opacity-100"
+                }`}
+                onLoad={() => setLoading(false)}
               />
             </div>
 

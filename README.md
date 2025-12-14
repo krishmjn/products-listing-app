@@ -21,7 +21,7 @@ This is a simple Next.js application that displays a list of products and allows
 
 ## Structure Explanation
 
-- `app/`: Contains Next.js pages and API routes.
+- `app/`: Contains Next.js pages.
 - `components/`: Reusable React components like `ProductCard` and `FavoriteButton`.
 - `lib/`: Utility functions for data fetching and favorite management.
 - `data/`: Static product data.
